@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo de Fútbol Bonifacio</title>
+    <style>
+        /* CSS Básico */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 10px; /* Margen pequeño para móviles */
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+        header h1 {
+            color: #1a237e; /* Azul oscuro */
+            margin: 0;
+            font-size: 28px; /* Tamaño de fuente ajustado */
+        }
+        nav {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los botones pasen abajo en móviles */
+            justify-content: space-around;
+            margin: 20px 0;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        nav button {
+            padding: 12px 10px; /* Menos padding horizontal para que entren más */
+            font-size: 14px; /* Fuente más pequeña */
+            font-weight: bold;
+            color: #fff;
+            background-color: #3949ab; /* Azul */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-grow: 1; /* Todos crecen por igual */
+            margin: 5px; /* Margen para separación */
+            min-width: 120px; /* Ancho mínimo */
+        }
+        nav button.active {
+            background-color: #1a237e; /* Azul más oscuro */
+        }
+        nav button:hover {
+            opacity: 0.9;
+        }
+        .content-section {
+            display: none; /* Ocultas por defecto */
+        }
+        .content-section.active {
+            display: block; /* Se muestra la activa */
+        }
+        iframe {
+            width: 100%;
+            height: 75vh; /* 75% de la altura de la pantalla */
+            border: none;
+            border-radius: 5px;
+        }
+        h2 {
+            font-size: 20px;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🏆 Torneo Bonifacio +45</h1>
+        </header>
+
+        <nav>
+            <button onclick="showTab('tablas')" class="active">Tablas</button>
+            <button onclick="showTab('fixture')">Fixture</button>
+            <button onclick="showTab('goleadores')">Goleadores</button>
+            <button onclick="showTab('sancionados')">Sancionados</button>
+            <button onclick="showTab('planteles')">Planteles</button>
+        </nav>
+
+        <div id="tablas" class="content-section active">
+            <h2>Tablas de Posiciones</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfl6t_XTXcneSE6LkK-5-zEgjz4BDQdP_6vkbJLN51eH_10DNHJ5JE5uEjpDJituDUERt0Fl7drEMs/pubhtml?gid=412765336&single=true"></iframe>
+        </div>
+
+        <div id="fixture" class="content-section">
+            <h2>Fixture y Resultados</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfl6t_XTXcneSE6LkK-5-zEgjz4BDQdP_6vkbJLN51eH_10DNHJ5JE5uEjpDJituDUERt0Fl7drEMs/pubhtml?gid=978511981&single=true"></iframe>
+        </div>
+
+        <div id="goleadores" class="content-section">
+            <h2>Tabla de Goleadores</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfl6t_XTXcneSE6LkK-5-zEgjz4BDQdP_6vkbJLN51eH_10DNHJ5JE5uEjpDJituDUERt0Fl7drEMs/pubhtml?gid=297304977&single=true"></iframe>
+        </div>
+
+        <div id="sancionados" class="content-section">
+            <h2>Disciplina y Sanciones</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfl6t_XTXcneSE6LkK-5-zEgjz4BDQdP_6vkbJLN51eH_10DNHJ5JE5uEjpDJituDUERt0Fl7drEMs/pubhtml?gid=918333116&single=true"></iframe>
+        </div>
+
+        <div id="planteles" class="content-section">
+            <h2>Planteles (Lista de Buena Fe)</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSfl6t_XTXcneSE6LkK-5-zEgjz4BDQdP_6vkbJLN51eH_10DNHJ5JE5uEjpDJituDUERt0Fl7drEMs/pubhtml?gid=81304136&single=true"></iframe>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript para manejar las pestañas
+        function showTab(tabId) {
+            // Ocultar todas las secciones
+            var sections = document.getElementsByClassName('content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+
+            // Quitar 'active' de todos los botones
+            var buttons = document.querySelectorAll('nav button');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+
+            // Mostrar la sección clickeada
+            document.getElementById(tabId).classList.add('active');
+
+            // Resaltar el botón clickeado
+            var activeButton = document.querySelector('nav button[onclick="showTab(\'' + tabId + '\')"]');
+            activeButton.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
+
